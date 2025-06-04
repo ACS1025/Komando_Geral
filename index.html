@@ -24,7 +24,27 @@
     .cliente { border-bottom: 1px solid #ccc; padding: 5px 0; }
     .cliente:hover { background: #f0f0f0; cursor: pointer; }
 
-    /* Estilo visual para ícones destacados */
+    .cliente.destaque {
+      background: #fff8dc;
+      border-left: 4px solid gold;
+      padding-left: 6px;
+    }
+
+    .link-btn {
+      display: inline-block;
+      margin: 2px 0;
+      padding: 4px 8px;
+      background: #007bff;
+      color: white;
+      border-radius: 4px;
+      font-size: 13px;
+      text-decoration: none;
+    }
+
+    .link-btn:hover {
+      background: #0056b3;
+    }
+
     .leaflet-destaque img {
       border: 3px solid gold;
       border-radius: 50%;
@@ -73,7 +93,6 @@
       const res = await fetch('clientes.json');
       const data = await res.json();
 
-      // Marcar destaque na empresa principal
       data.forEach(c => {
         if (c.nome === "Komando Gerenciamento de Riscos") {
           c.destaque = true;
@@ -88,7 +107,6 @@
       const lista = document.getElementById('lista-clientes');
       lista.innerHTML = '';
 
-      // Remove marcadores anteriores
       markers.forEach(m => map.removeLayer(m));
       markers = [];
 
@@ -97,8 +115,14 @@
 
       filtrados.forEach(c => {
         const item = document.createElement('div');
-        item.className = 'cliente';
-        item.innerHTML = `<strong>${c.nome}</strong><br>${c.cidade}/${c.estado}`;
+        item.className = 'cliente' + (c.destaque ? ' destaque' : '');
+        item.innerHTML = `
+          <strong>${c.nome}</strong><br>
+          📍 ${c.cidade}/${c.estado}<br>
+          ${c.telefone ? `📞 <a href="tel:${c.telefone.replace(/\D/g, '')}">${c.telefone}</a><br>` : ''}
+          ${c.responsavel ? `👤 ${c.responsavel}<br>` : ''}
+          ${c.links?.length ? c.links.map(l => `<a class="link-btn" href="${l.url}" target="_blank">🔗 ${l.nome}</a>`).join('<br>') : ''}
+        `;
         item.onclick = () => {
           map.setView([c.latitude, c.longitude], 10);
         };
@@ -116,8 +140,14 @@
 
         const marker = L.marker([c.latitude, c.longitude], { icon })
           .addTo(map)
-          .bindPopup(`<b>${c.nome}</b><br>${c.cidade}/${c.estado}<br>
-            ${c.links?.map(l => `<a href="${l.url}" target="_blank">${l.nome}</a>`).join('<br>') || ''}
+          .bindPopup(`
+            <div style="font-size: 14px; line-height: 1.4;">
+              <strong>${c.nome}</strong><br>
+              📍 ${c.cidade}/${c.estado}<br>
+              ${c.telefone ? `📞 <a href="tel:${c.telefone.replace(/\D/g, '')}">${c.telefone}</a><br>` : ''}
+              ${c.responsavel ? `👤 ${c.responsavel}<br>` : ''}
+              ${c.links?.length ? `<div style="margin-top: 5px;">${c.links.map(l => `<a class="link-btn" href="${l.url}" target="_blank">🔗 ${l.nome}</a>`).join('<br>')}</div>` : ''}
+            </div>
           `);
 
         markers.push(marker);
@@ -129,17 +159,16 @@
       } else {
         map.setView(brasilView.center, brasilView.zoom);
       }
-}
+    }
 
-document.getElementById('filtros').addEventListener('click', (e) => {
-  if (e.target.classList.contains('btn')) {
-    const estado = e.target.dataset.estado;
-    atualizarLista(estado);
-  }
-});
+    document.getElementById('filtros').addEventListener('click', (e) => {
+      if (e.target.classList.contains('btn')) {
+        const estado = e.target.dataset.estado;
+        atualizarLista(estado);
+      }
+    });
 
     carregarClientes();
   </script>
 </body>
-</html>
-
+</html

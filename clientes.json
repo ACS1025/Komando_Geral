@@ -1,0 +1,78 @@
+[
+  {
+    "nome": "Komando Gerenciamento de Riscos",
+    "cidade": "São Paulo",
+    "estado": "SP",
+    "latitude": -23.64595,
+    "longitude": -46.6408,
+    "logo": "src/logo_kmdhite_icon.png",
+    "destaque": true,
+    "telefone": " ",
+    "responsavel": " ",
+    "links": [
+      {
+        "nome": "Site",
+        "url": "https://www.komando.com.br/"
+      },
+      {
+        "nome": "Painel",
+        "url": "https://sites.google.com/view/komandoresultados/resultados"
+      }
+    ]
+  },
+  {
+    "nome": "Supersonic",
+    "cidade": "Campinas",
+    "estado": "SP",
+    "latitude": -22.994007412692987, 
+    "longitude": -47.131251785996334,
+    "logo": "src/logo_Supersonic_icon.png",
+    "telefone": "(19) 98126-0767",
+    "responsavel": "Ger. Daysi",
+    "links": [
+      {
+        "nome": "Site",
+        "url": "https://acs1025.github.io/PA_Campinas/index.html"
+      },
+      {
+        "nome": "Painel",
+        "url": "https://sites.google.com/view/pacampinas/dados-mensal"
+      }
+    ]
+  },
+  {
+    "nome": "Air Supply",
+    "cidade": "São Paulo",
+    "estado": "SP",
+    "latitude": -23.50919,
+    "longitude": -46.57215,
+    "logo": "src/logo_AirSupply_icon.png",
+    "telefone": "(11) ",
+    "responsavel": "Ger. Caio",
+    "links": [
+      {
+        "nome": "Painel",
+        "url": "https://sites.google.com/view/kmdairsupply/air-supply"
+      }
+    ]
+  },
+  {
+    "nome": "GT Minas",
+    "cidade": "Varginha",
+    "estado": "MG",
+    "latitude": -21.52306, 
+    "longitude": -45.1508,
+    "logo": "src/logo_GTMinasicon.png",
+    "telefone": "(21) 96666-6666",
+    "responsavel": "Ana Costa",
+    "links": [
+      {
+        "nome": "Painel",
+
+        "url": "https://cliente-xyz.com"
+      }
+    ]
+  
+  
+  }
+]

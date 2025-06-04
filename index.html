@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Mapa interativo de clientes da Komando GR.">
+  <title>Komando GR - Mapa Interativo de Clientes</title>
+  <link rel="icon" href="src/logo_kmdwhite_icon.png" type="image/x-icon" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <style>
+    body { margin: 0; font-family: sans-serif; }
+    header {
+      background: #007bff; color: white; padding: 10px;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    #container { display: flex; height: 100vh; }
+    #sidebar { width: 250px; overflow-y: auto; border-right: 1px solid #ccc; padding: 10px; }
+    #map { flex: 1; height: 100%; }
+    .btn-group { margin: 10px 0; display: flex; flex-wrap: wrap; gap: 5px; }
+    .btn {
+      padding: 5px 10px; cursor: pointer;
+      background: #007bff; color: white; border: none; border-radius: 5px;
+    }
+    .cliente { border-bottom: 1px solid #ccc; padding: 5px 0; }
+    .cliente:hover { background: #f0f0f0; cursor: pointer; }
+
+    /* Estilo visual para ícones destacados */
+    .leaflet-destaque img {
+      border: 3px solid gold;
+      border-radius: 50%;
+      box-shadow: 0 0 12px 4px rgba(255, 215, 0, 0.6);
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <span>Mapa de Clientes</span>
+    <button id="resetViewBtn" class="btn">Resetar Visualização</button>
+  </header>
+  <div id="container">
+    <div id="sidebar">
+      <div class="btn-group" id="filtros">
+        <button class="btn" data-estado="Todos">Todos</button>
+        <button class="btn" data-estado="SP">SP</button>
+        <button class="btn" data-estado="RJ">RJ</button>
+        <button class="btn" data-estado="MG">MG</button>
+      </div>
+      <div id="lista-clientes"></div>
+    </div>
+    <div id="map"></div>
+  </div>
+
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <script>
+    let map = L.map('map').setView([-15.78, -47.93], 4);
+    let clientes = [];
+    let markers = [];
+
+    const brasilView = {
+      center: [-15.78, -47.93],
+      zoom: 4
+    };
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '© OpenStreetMap'
+    }).addTo(map);
+
+    document.getElementById('resetViewBtn').onclick = () => {
+      map.setView(brasilView.center, brasilView.zoom);
+    };
+
+    async function carregarClientes() {
+      const res = await fetch('clientes.json');
+      const data = await res.json();
+
+      // Marcar destaque na empresa principal
+      data.forEach(c => {
+        if (c.nome === "Komando Gerenciamento de Riscos") {
+          c.destaque = true;
+        }
+      });
+
+      clientes = data;
+      atualizarLista('Todos');
+    }
+
+    function atualizarLista(estado) {
+      const lista = document.getElementById('lista-clientes');
+      lista.innerHTML = '';
+
+      // Remove marcadores anteriores
+      markers.forEach(m => map.removeLayer(m));
+      markers = [];
+
+      const filtrados = estado === 'Todos' ? clientes : clientes.filter(c => c.estado === estado);
+      let bounds = [];
+
+      filtrados.forEach(c => {
+        const item = document.createElement('div');
+        item.className = 'cliente';
+        item.innerHTML = `<strong>${c.nome}</strong><br>${c.cidade}/${c.estado}`;
+        item.onclick = () => {
+          map.setView([c.latitude, c.longitude], 10);
+        };
+        lista.appendChild(item);
+
+        const isDestaque = c.destaque === true;
+
+        const icon = L.icon({
+          iconUrl: c.logo,
+          iconSize: isDestaque ? [60, 60] : [40, 40],
+          iconAnchor: [isDestaque ? 30 : 20, isDestaque ? 60 : 40],
+          popupAnchor: [0, -40],
+          className: isDestaque ? 'leaflet-destaque' : ''
+        });
+
+        const marker = L.marker([c.latitude, c.longitude], { icon })
+          .addTo(map)
+          .bindPopup(`<b>${c.nome}</b><br>${c.cidade}/${c.estado}<br>
+            ${c.links?.map(l => `<a href="${l.url}" target="_blank">${l.nome}</a>`).join('<br>') || ''}
+          `);
+
+        markers.push(marker);
+        bounds.push([c.latitude, c.longitude]);
+      });
+
+      if (bounds.length > 0) {
+        map.fitBounds(bounds, { padding: [50, 50] });
+      } else {
+        map.setView(brasilView.center, brasilView.zoom);
+      }
+}
+
+document.getElementById('filtros').addEventListener('click', (e) => {
+  if (e.target.classList.contains('btn')) {
+    const estado = e.target.dataset.estado;
+    atualizarLista(estado);
+  }
+});
+
+    carregarClientes();
+  </script>
+</body>
+</html>
+

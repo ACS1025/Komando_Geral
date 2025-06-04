@@ -5,8 +5,8 @@
     "estado": "SP",
     "latitude": -23.64595,
     "longitude": -46.6408,
-    "logo": "src/logo_kmdhite_icon.png",
-    "destaque": true,
+    "logo": "src/logo_kmdwhite_icon.png",
+     "destaque": true,
     "telefone": " ",
     "responsavel": " ",
     "links": [
@@ -26,7 +26,7 @@
     "estado": "SP",
     "latitude": -22.994007412692987, 
     "longitude": -47.131251785996334,
-    "logo": "src/logo_Supersonic_icon.png",
+    "logo": "src/logo_ssonic_icon.png",
     "telefone": "(19) 98126-0767",
     "responsavel": "Ger. Daysi",
     "links": [

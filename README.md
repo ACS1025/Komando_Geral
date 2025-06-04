@@ -1,1 +1,2 @@
-# Komando_Geral
+# Kmd_Geral
+Projeto inicial

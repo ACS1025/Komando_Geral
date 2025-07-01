@@ -84,11 +84,16 @@
     "telefone": "(35) ",
     "responsavel": "Ger. Caio",
     "links": [
+
+      {
+        "nome": "Site",
+        "url": "https://sites.google.com/view/samid"
+      },
       {
         "nome": "Painel",
-
         "url": "https://sites.google.com/view/samid"
       }
+     
     ]
   
   

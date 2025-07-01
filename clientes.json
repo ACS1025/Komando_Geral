@@ -71,6 +71,24 @@
 
         "url": "https://sites.google.com/view/gtminas"
       }
+    ]     
+  },
+
+  {
+    "nome": "Samid",
+    "cidade": "Abre Campo",
+    "estado": "MG",
+    "latitude": -20.291650991214446,   
+    "longitude": -42.484191902041765,
+    "logo": "src/logo_samid_icon.png",
+    "telefone": "(35) ",
+    "responsavel": "Ger. Caio",
+    "links": [
+      {
+        "nome": "Painel",
+
+        "url": "https://sites.google.com/view/samid"
+      }
     ]
   
   

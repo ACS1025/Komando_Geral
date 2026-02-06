@@ -92,7 +92,22 @@
       }
      
     ]
-  
-  
+    
+  },
+  {
+    "nome": "Sompo",
+    "cidade": "São Paulo",
+    "estado": "SP",
+    "latitude": -23.5745503,
+    "longitude": -46.6447072,
+    "logo": "src/logo_sompo_icon.png",
+    "telefone": "(11) ",
+    "responsavel": "Ger. Daysi",
+    "links": [
+      {
+        "nome": "Painel",
+        "url": "https://sites.google.com/view/kmd-sompo/resultados"
+      }
+    ]
   }
 ]

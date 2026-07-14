@@ -39,12 +39,12 @@
         "url": "https://sites.google.com/view/pacampinas/pa-mensal"
       },
       {"nome": "Alerta operacional",
-        "url":"https://acs1025.github.io/alerta_operacional/"
+        "url": "https://acs1025.github.io/alerta_operacional/"
       },
       {"nome": "Rotate",
-      "url": "https://acs1025.github.io/Rotate_ssonic/"
+        "url": "https://acs1025.github.io/Rotate_ssonic/"
       },
-      {"Nome": "Briefing",
+      {"nome": "Briefing",
         "url": "https://res.cloudinary.com/dijagbe0r/image/upload/v1773329384/Briefing_Kmd_tiecpz.jpg" 
       }
     ]

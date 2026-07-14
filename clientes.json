@@ -38,6 +38,9 @@
         "nome": "Painel",
         "url": "https://sites.google.com/view/pacampinas/pa-mensal"
       },
+      {"nome": "aLERTA OPERACIONAL",
+        "url":"https://acs1025.github.io/alerta_operacional/"
+      },
       {"nome": "Rotate",
       "url": "https://acs1025.github.io/Rotate_ssonic/"
     }
